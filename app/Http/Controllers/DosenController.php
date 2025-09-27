@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mahasiswa;
+use App\Models\Dosen;
 use Illuminate\Http\Request;
 
-class MahasiswaController extends Controller
+class DosenController extends Controller
 {
     public function index()
     {
-        $data = Mahasiswa::all();
-        return view('mahasiswa.index', compact('data'));
+        $data = Dosen::all();
+        return view('dosen.index', compact('data'));
     }
 
     public function store(Request $request)
     {
-        Mahasiswa::create($request->only('nama', 'nim'));
+        Dosen::create($request->only('nama', 'nip'));
         return redirect()->back();
     }
       // ✔ Edit
     public function edit($id)
     {
-        $mhs = Mahasiswa::findOrFail($id);
-        return view('mahasiswa.edit', compact('mhs'));
+        $mhs = Dosen::findOrFail($id);
+        return view('dosen.edit', compact('dsn'));
     }
 
     // ✔ Update
@@ -33,19 +33,19 @@ class MahasiswaController extends Controller
             'nim'  => 'required'
         ]);
 
-        $mhs = Mahasiswa::findOrFail($id);
+        $mhs = Dosen::findOrFail($id);
         $mhs->update($request->only('nama','nim'));
 
-        return redirect()->route('mahasiswa.index')->with('success','Data berhasil diupdate!');
+        return redirect()->route('dosen.index')->with('success','Data berhasil diupdate!');
     }
 
     // ✔ Delete
     public function destroy($id)
     {
-        $mhs = Mahasiswa::findOrFail($id);
+        $mhs = Dosen::findOrFail($id);
         $mhs->delete();
 
-        return redirect()->route('mahasiswa.index')->with('success','Data berhasil dihapus!');
+        return redirect()->route('dosen.index')->with('success','Data berhasil dihapus!');
     }
 }
 
